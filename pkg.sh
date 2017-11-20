@@ -24,7 +24,12 @@ main() {
     esac
   done
 
-  WITH=${PKG_CMD:-pacman}
+  if command -v apt      >/dev/null; then PKG_SYS="apt"
+  elif command -v yum    >/dev/null; then PKG_SYS="yum"
+  elif command -v brew   >/dev/null; then PKG_SYS="brew"
+  elif command -v pacman >/dev/null; then PKG_SYS="pacman"
+  fi
+  WITH=${PKG_CMD:-$PKG_SYS}
 
   OPTIND=1
   while getopts "hw:" opt
