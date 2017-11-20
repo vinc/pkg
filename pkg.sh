@@ -25,9 +25,11 @@ main() {
   done
 
   if command -v apt      >/dev/null; then PKG_SYS="apt"
+  elif command -v dnf    >/dev/null; then PKG_SYS="dnf"
   elif command -v yum    >/dev/null; then PKG_SYS="yum"
   elif command -v brew   >/dev/null; then PKG_SYS="brew"
   elif command -v pacman >/dev/null; then PKG_SYS="pacman"
+  elif command -v zypper >/dev/null; then PKG_SYS="zypper"
   fi
   WITH=${PKG_CMD:-$PKG_SYS}
 
