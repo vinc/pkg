@@ -44,6 +44,13 @@ main() {
   done
   shift $(expr $OPTIND - 1)
 
+  case "$1" in
+    "s") shift; set -- "search"  "$@" ;;
+    "i") shift; set -- "install" "$@" ;;
+    "r") shift; set -- "remove"  "$@" ;;
+    "u") shift; set -- "upgrade" "$@" ;;
+  esac
+
   $WITH "$@"
 }
 
