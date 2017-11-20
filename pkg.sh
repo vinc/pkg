@@ -60,37 +60,19 @@ duplicate() {
 
 pacman() {
   case "$1" in
-    i|install)
-      CMD="-S"
-      ;;
-    r|remove)
-      CMD="-R"
-      ;;
-    u|upgrade)
-      CMD="-Syu"
-      ;;
-    s|search)
-      CMD="-Ss"
-      ;;
-    *)
-      CMD="$1"
-      ;;
+    "search")  shift; set -- "-Ss"  "$@" ;;
+    "install") shift; set -- "-S"   "$@" ;;
+    "remove")  shift; set -- "-R"   "$@" ;;
+    "upgrade") shift; set -- "-Syu" "$@" ;;
   esac
-  shift
-  command "$FUNCNAME" "$CMD" "$*"
+  command "$FUNCNAME" "$@"
 }
 
 npm() {
   case "$1" in
-    r|remove)
-      CMD="uninstall"
-      ;;
-    *)
-      CMD="$1"
-      ;;
+    "remove") shift; set -- "uninstall" "$@" ;;
   esac
-  shift
-  command "$FUNCNAME" "$CMD" "$*"
+  command "$FUNCNAME" "$@"
 }
 
 # Function alias
