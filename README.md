@@ -1,26 +1,25 @@
-# pkg(1) -- a wrapper around package managers
+# pkg(8) - a wrapper around package managers
 
-Status: unstable
+Status: experimental
 
 
 ## Installation
 
-    $ git clone git://github.com/vinc/pkg.git
-    $ cd pkg
+    $ wget https://raw.githubusercontent.com/vinc/pkg/master/pkg.sh
     $ sudo cp pkg.sh /usr/local/bin/pkg
     $ sudo chmod a+x /usr/local/bin/pkg
 
 
 ## Usage
 
-Let say you use Arch Linux on your local computer and Ubuntu on a remote server.
-To search a package named `foo` you would type `pacman -Ss foo` on the former
-and `sudo apt search foo` on the latter.
+### With system package managers
 
-And you would type `sudo pacman -S foo` or `sudo apt install foo` to install it.
+Let say you use Arch Linux on your local computer and Debian on a remote server.
+You would type `pacman -Ss foo` on the former to search a package named `foo` 
+and `apt search foo` or `apt-cache search foo` on the latter.
 
-Not so long ago on Debian systems you would have typed `apt-cache search foo`
-and `sudo apt-get install foo`.
+And you would type `sudo pacman -S foo` to install it on Arch and
+`sudo apt install foo` or `sudo apt-get install foo` on Debian.
 
 With `pkg` you can search a package on both systems with:
 
@@ -32,8 +31,10 @@ And install it with:
 
 Or you could even type `pkg s foo` and `pkg i foo` to save a few keystrokes.
 
-You may use some language package managers in addition to the system one, like
-`npm` or `pip`, no worries:
+### With language package managers
+
+You may use some language package managers, like `npm` or `pip`, in addition
+to the system one. No worries, `pkg` go you covered:
 
     $ pkg --with npm install foo
 
