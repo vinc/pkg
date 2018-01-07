@@ -42,7 +42,7 @@ main() {
       "?") usage >&2; exit 1 ;;
     esac
   done
-  shift $(expr $OPTIND - 1)
+  shift "$((OPTIND - 1))"
 
   case "$1" in
     "s") shift; set -- "search"  "$@" ;;
@@ -55,7 +55,7 @@ main() {
 }
 
 duplicate() {
-  eval "$(echo "$2()"; declare -f $1 | tail -n +2)"
+  eval "$(echo "$2()"; declare -f "$1" | tail -n +2)"
 }
 
 pacman() {
@@ -65,14 +65,14 @@ pacman() {
     "remove")  shift; set -- "-R"   "$@" ;;
     "upgrade") shift; set -- "-Syu" "$@" ;;
   esac
-  command "$FUNCNAME" "$@"
+  command "${FUNCNAME[0]}" "$@"
 }
 
 npm() {
   case "$1" in
     "remove") shift; set -- "uninstall" "$@" ;;
   esac
-  command "$FUNCNAME" "$@"
+  command "${FUNCNAME[0]}" "$@"
 }
 
 # Function alias
