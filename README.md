@@ -1,6 +1,9 @@
 # pkg(8) - a wrapper around package managers
 
-Status: experimental
+When you have MacOS on your work computer, Arch Linux on your home computer,
+and Ubuntu on your home server, you might enjoy using `pkg`, a thin wrapper
+around `brew`, `pacman`, and `apt` respectively, that will offer you a common
+interface and save you some keystrokes.
 
 
 ## Installation
@@ -14,7 +17,9 @@ Status: experimental
 
 ### With system package managers
 
-Let say you use Arch Linux on your local computer and Debian on a remote server.
+Let say you use Arch Linux on your local computer and Debian on a remote
+server.
+
 You would type `pacman -Ss foo` on the former to search a package named `foo` 
 and `apt search foo` or `apt-cache search foo` on the latter.
 
@@ -27,9 +32,10 @@ With `pkg` you can search a package on both systems with:
 
 And install it with:
 
-    $ pkg install foo
+    $ sudo pkg install foo
 
-Or you could even type `pkg s foo` and `pkg i foo` to save a few keystrokes.
+Or you could even type `pkg s foo` and `sudo pkg i foo` to save a few
+keystrokes.
 
 ### With language package managers
 
@@ -47,4 +53,4 @@ will get corrected or passed on.
 License
 -------
 
-Copyright (c) 2017 Vincent Ollivier. Released under MIT.
+Copyright (c) 2017-2018 Vincent Ollivier. Released under MIT.
