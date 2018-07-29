@@ -25,9 +25,9 @@ main() {
   done
 
   if command -v apt      >/dev/null; then PKG_SYS="apt"
+  elif command -v brew   >/dev/null; then PKG_SYS="brew"
   elif command -v dnf    >/dev/null; then PKG_SYS="dnf"
   elif command -v yum    >/dev/null; then PKG_SYS="yum"
-  elif command -v brew   >/dev/null; then PKG_SYS="brew"
   elif command -v pacman >/dev/null; then PKG_SYS="pacman"
   elif command -v zypper >/dev/null; then PKG_SYS="zypper"
   fi
@@ -54,10 +54,6 @@ main() {
   $WITH "$@"
 }
 
-duplicate() {
-  eval "$(echo "$2()"; declare -f "$1" | tail -n +2)"
-}
-
 pacman() {
   case "$1" in
     "search")  shift; set -- "-Ss"  "$@" ;;
@@ -75,8 +71,13 @@ npm() {
   command "${FUNCNAME[0]}" "$@"
 }
 
-# Function alias
-duplicate "pacman" "pacaur"
-duplicate "npm" "pip"
+# Alias function
+cp-pkg() {
+  eval "$(echo "$2()"; declare -f "$1" | tail -n +2)"
+}
+
+cp-pkg "pacman" "pacaur"
+cp-pkg "pacman" "yay"
+cp-pkg "npm" "pip"
 
 main "$@"
