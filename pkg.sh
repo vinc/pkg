@@ -25,6 +25,7 @@ main() {
   done
 
   if command -v apt      >/dev/null; then PKG_SYS="apt"
+  elif command -v apk    >/dev/null; then PKG_SYS="apk"
   elif command -v brew   >/dev/null; then PKG_SYS="brew"
   elif command -v dnf    >/dev/null; then PKG_SYS="dnf"
   elif command -v yum    >/dev/null; then PKG_SYS="yum"
@@ -52,6 +53,14 @@ main() {
   esac
 
   $WITH "$@"
+}
+
+apk() {
+  case "$1" in
+    "install") shift; set -- "add"   "$@" ;;
+    "remove")  shift; set -- "del"   "$@" ;;
+  esac
+  command "${FUNCNAME[0]}" "$@"
 }
 
 pacman() {
